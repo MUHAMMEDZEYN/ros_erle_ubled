@@ -1,15 +1,17 @@
 //ROS includes
 #include "ros/ros.h"
 
-#include "std_msgs/UInt8.h"
-#include "std_msgs/UInt16.h"
-#include "std_msgs/String.h"
+//#include "std_msgs/UInt8.h"
+//#include "std_msgs/UInt16.h"
+//#include "std_msgs/String.h"
 
 #include <unistd.h> //for using sleep fn
 #include "DycoLED_Linux.h"
 
 //Include custom message
 #include "ros_erle_ubled/single_led_preset_pattern.h"
+#include "ros_erle_ubled/init_number_leds.h"
+#include "ros_erle_ubled/preset_pattern.h"
 
 //BBB Pin definitions
 #define scl BBB_P9_14
@@ -55,18 +57,20 @@ int message_type=0;
 bool initialized=false;
 
 //Receive which preset pattern user want to use
-void patternCallback (const std_msgs::UInt8::ConstPtr& msg)
+//void patternCallback (const std_msgs::UInt8::ConstPtr& msg)
+void patternCallback (const ros_erle_ubled::preset_pattern::ConstPtr& msg)
 {
 	//ROS_INFO("I heard: [%i] pattern\n", msg->data);
-	patt= msg->data;
+	patt= msg->ubled_preset_pattern;
 	message_type=2;//message= preset pattern type
 }
 
 //Receive number of leds to initialize
-void initCallback (const std_msgs::UInt16::ConstPtr& msg)
+//void initCallback (const std_msgs::UInt16::ConstPtr& msg)
+void initCallback (const ros_erle_ubled::init_number_leds::ConstPtr& msg)
 {
     //ROS_INFO("I heard: [%i] number of leds", msg->data);
-    init_number_leds= msg->data;
+    init_number_leds= msg->number_leds;
     message_type=1;//message=initialization type
 }
 
@@ -90,7 +94,7 @@ int main(int argc, char *argv[])
 	//Subscribe to the topics
   	ros::Subscriber sub = n.subscribe("ubled_preset_pattern", 1000, patternCallback);
   	ros::Subscriber sub_init = init_topic.subscribe("quantity_leds",1000,initCallback);
-	ros::Subscriber set_led =set_led_topic.subscribe("set_led_pattern",1000,set_led_patternCallback);
+ 	ros::Subscriber set_led =set_led_topic.subscribe("set_led_pattern",1000,set_led_patternCallback);
 
 	ros::Rate loop_rate(25000); //25 khz
 

@@ -27,3 +27,7 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 add_executable(main src/GPIO_BBB.cpp src/DycoLEDDriver.cpp src/DycoLED_Linux.cpp src/main_berria.cpp)
 target_link_libraries(main ${catkin_LIBRARIES})
 add_dependencies(main main_cpp)
+
+add_executable(writer src/writer.cpp)
+target_link_libraries(writer ${catkin_LIBRARIES})
+add_dependencies(writer ros_erle_ubled_generate_messages_cpp)
