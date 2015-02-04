@@ -121,8 +121,8 @@ int main(int argc, char *argv[])
   	 		}
                 if (message_type==3)//Prestablished pattern message
 			{
-				ROS_INFO("Message type 3, led %i and pattern %i\n",single_led,single_led_pattern);
-				ubled.set_preset_pattern(single_led,single_led_pattern);
+				//ROS_INFO("Message type 3, led %i and pattern %i\n",single_led,single_led_pattern);
+				ubled.set_single_led(single_led,single_led_pattern);
 			}
 
 	  	ros::spinOnce();

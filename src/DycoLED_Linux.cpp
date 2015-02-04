@@ -106,6 +106,15 @@ void DycoLED::set_leds (uint16_t number_led,uint8_t patt)
 
 }
 
+void DycoLED::set_single_led (uint16_t number_led,uint8_t patt)
+{//Use it main
+ //Function that writess pattern in a single LED that user has selected, generates beat for refreshing.
+
+         ubled_strip.set_pattern(number_led,preset_pattern[patt].color,preset_pattern[patt].brightness,preset_pattern[patt].time,preset_pattern[patt].res,preset_pattern[patt].len);
+    
+    ubled_strip.generate_beat_pattern();
+
+}
 // update - updates led according to timed_updated.  Should be called
 // at 50Hz
 //void DycoLED::update()

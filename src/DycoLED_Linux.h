@@ -35,7 +35,7 @@ public:
     //SET_LEDS function: writes back/front colors and status leds depending on
     //quantity of leds and number of arms, status leds is the first led in each arm.
     void set_leds(uint16_t led, uint8_t patt);
-
+    void set_single_led(uint16_t led, uint8_t patt);
 //protected:
     void set_preset_pattern(uint16_t led,uint8_t patt);
 
