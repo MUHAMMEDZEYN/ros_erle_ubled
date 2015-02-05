@@ -1,8 +1,5 @@
 # ros-hydro-erle-ubled
 
-ros-hydro-erle-ubled
-------------------
-
 Support forums and chats
 ------------------------
 
