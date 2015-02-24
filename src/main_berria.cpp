@@ -60,7 +60,7 @@ bool initialized=false;
 //void patternCallback (const std_msgs::UInt8::ConstPtr& msg)
 void patternCallback (const ros_erle_ubled::preset_pattern::ConstPtr& msg)
 {
-	//ROS_INFO("I heard: [%i] pattern\n", msg->data);
+	ROS_INFO("I heard: [%i] pattern\n",msg->ubled_preset_pattern);
 	patt= msg->ubled_preset_pattern;
 	message_type=2;//message= preset pattern type
 }
@@ -69,7 +69,7 @@ void patternCallback (const ros_erle_ubled::preset_pattern::ConstPtr& msg)
 //void initCallback (const std_msgs::UInt16::ConstPtr& msg)
 void initCallback (const ros_erle_ubled::init_number_leds::ConstPtr& msg)
 {
-    //ROS_INFO("I heard: [%i] number of leds", msg->data);
+    ROS_INFO("I heard: [%i] number of leds", msg->number_leds);
     init_number_leds= msg->number_leds;
     message_type=1;//message=initialization type
 }
@@ -82,6 +82,7 @@ void set_led_patternCallback (const ros_erle_ubled::single_led_preset_pattern::C
     single_led_pattern= msg->led_preset_pattern;
     message_type=3;//message=led&pattern type
 }
+
 int main(int argc, char *argv[])
 {
 	uint16_t old_led_num=0;//to store old quantity of leds 
@@ -92,12 +93,13 @@ int main(int argc, char *argv[])
 	ros::NodeHandle n,init_topic, set_led_topic;
 
 	//Subscribe to the topics
-  	ros::Subscriber sub = n.subscribe("ubled_preset_pattern", 1000, patternCallback);
-  	ros::Subscriber sub_init = init_topic.subscribe("quantity_leds",1000,initCallback);
- 	ros::Subscriber set_led =set_led_topic.subscribe("set_led_pattern",1000,set_led_patternCallback);
+  	ros::Subscriber sub = n.subscribe("preset_pattern", 1000, patternCallback);
+  	ros::Subscriber sub_init = init_topic.subscribe("init_number_leds",1000,initCallback);
+ 	ros::Subscriber set_led =set_led_topic.subscribe("single_led_preset_pattern",1000,set_led_patternCallback);
 
 	ros::Rate loop_rate(25000); //25 khz
 
+	ROS_INFO("Hello!\n");
 	while(ros::ok()){//Loop
 
 		//ROS_INFO("message is type %i\n", message_type);
@@ -132,5 +134,12 @@ int main(int argc, char *argv[])
 	  	ros::spinOnce();
 	  	loop_rate.sleep();//sleep until 25KHz is done
   		}
+	return 0;
 }
 
+/*
+int main()
+{
+return 0;
+}
+*/
