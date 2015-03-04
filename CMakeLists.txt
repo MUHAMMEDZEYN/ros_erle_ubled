@@ -31,3 +31,16 @@ add_dependencies(main main_cpp)
 add_executable(writer src/writer.cpp)
 target_link_libraries(writer ${catkin_LIBRARIES})
 add_dependencies(writer ros_erle_ubled_generate_messages_cpp)
+
+file(GLOB SCRIPTS ${PROJECT_SOURCE_DIR}/examples/*)
+  catkin_install_python(PROGRAMS
+  ${SCRIPTS}
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
+install(
+	TARGETS writer main
+	ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+	LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+	RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
