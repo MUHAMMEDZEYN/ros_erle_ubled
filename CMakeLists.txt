@@ -19,9 +19,9 @@ add_executable(ros_erle_ubled_main src/GPIO_BBB.cpp src/DycoLEDDriver.cpp src/Dy
 target_link_libraries(ros_erle_ubled_main ${catkin_LIBRARIES})
 add_dependencies(ros_erle_ubled_main ros_erle_ubled_generate_messages_cpp)
 
-#add_executable(writer src/writer.cpp)
-#target_link_libraries(writer ${catkin_LIBRARIES})
-#add_dependencies(writer ros_erle_ubled_generate_messages_cpp)
+add_executable(ros_erle_ubled_writer examples/ros_erle_ubled_writer.cpp)
+target_link_libraries(ros_erle_ubled_writer ${catkin_LIBRARIES})
+add_dependencies(ros_erle_ubled_writer ros_erle_ubled_generate_messages_cpp)
 
 file(GLOB SCRIPTS ${PROJECT_SOURCE_DIR}/examples/*)
   catkin_install_python(PROGRAMS
