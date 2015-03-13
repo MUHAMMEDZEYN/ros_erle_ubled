@@ -17,7 +17,6 @@ DycoLEDDriver::DycoLEDDriver()
 {
     clock_gettime(CLOCK_MONOTONIC, &_sketch_start_time);
 
-
     data_buf =0x8000;
     clk_prev_time = 0;
     clk_pulse_count = 0;
