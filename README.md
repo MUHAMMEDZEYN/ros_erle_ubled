@@ -22,7 +22,7 @@ rosrun ros_erle_ubled ros_erle_ubled_main
 cd ~/ros_catkin_ws/src
 git clone https://github.com/ros_erle_ubled
 cd ..
-catkin_make_isolate
+catkin_make_isolated
 source devel_isolated/setup.bash
 ```
 or 
